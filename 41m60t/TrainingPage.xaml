@@ -1,0 +1,21 @@
+﻿<Page
+    x:Class="_41m60t.Assets.TrainingPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:_41m60t.Assets"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Loaded="Page_Loaded">
+
+    <Canvas Name="MainCanvas" 
+        Margin="20,30" 
+        Grid.Row="1" 
+        PointerPressed="MainCanvas_PointerPressed"
+        PointerEntered="MainCanvas_PointerEntered"
+        PointerExited="MainCanvas_PointerExited"
+        Background="White"
+        MaxWidth="600"
+        MaxHeight="400" SizeChanged="MainCanvas_SizeChanged">
+    </Canvas>
+</Page>

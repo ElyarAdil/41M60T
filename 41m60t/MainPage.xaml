@@ -1,0 +1,304 @@
+﻿<Page
+    x:Class="_41m60t.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:_41m60t"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Loaded="Page_Loaded"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <Style TargetType="Button" x:Key="CustomButtonStyle">
+            <Setter Property="Background" Value="Black" />
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="Black" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Padding" Value="20,10" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontFamily" Value="Segoe MDL2 Assets" />
+            <Setter Property="FontWeight" Value="Normal" />
+            <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
+            <Setter Property="UseSystemFocusVisuals" Value="True" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid x:Name="RootGrid" 
+                          Background="{TemplateBinding Background}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <Storyboard>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="PointerOver">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid"
+                                                     Storyboard.TargetProperty="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#e00" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                                     Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="White" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid"
+                                                     Storyboard.TargetProperty="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#e55" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                                     Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="White" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <PointerDownThemeAnimation Storyboard.TargetName="RootGrid" />
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <ContentPresenter x:Name="ContentPresenter"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Content="{TemplateBinding Content}"
+                            ContentTransitions="{TemplateBinding ContentTransitions}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            Padding="{TemplateBinding Padding}"
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                            AutomationProperties.AccessibilityView="Raw"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+    <Grid Background="#fff">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="DetailStackPanel.Visibility" Value="Collapsed"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="700"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="DetailStackPanel.Visibility" Value="Visible"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="251*"/>
+            <ColumnDefinition Width="389*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <RelativePanel Background="Black" Grid.Row="0" Grid.ColumnSpan="2">
+            <Button 
+                FontFamily="Segoe MDL2 Assets"
+                Content="&#xE102;"
+                Style="{StaticResource CustomButtonStyle}"
+                Name="StartButton"
+                Click="StartButton_Click"
+                RelativePanel.AlignVerticalCenterWithPanel="True"
+                />
+
+            <TextBlock 
+                Name="TimeLeftTextBlock"
+                Foreground="White"
+                RelativePanel.AlignVerticalCenterWithPanel="True"
+                RelativePanel.RightOf="StartButton" Margin="15,0,20,0">00.00</TextBlock>
+            <Button
+                FontFamily="Segoe MDL2 Assets"
+                Name="SettingsButton"
+                Content="&#xE713;"
+                RelativePanel.AlignRightWithPanel="True"
+                Style="{StaticResource CustomButtonStyle}"
+                RelativePanel.AlignVerticalCenterWithPanel="True"
+                Click="SettingsButton_Click"
+                />
+            <Rectangle Name="DivideReactangle" Fill="White" Width="1" RelativePanel.RightOf="TimeLeftTextBlock" Height="20" RelativePanel.AlignVerticalCenterWithPanel="True"/>
+            <StackPanel
+                Name="LifeStackPanel"
+                RelativePanel.RightOf="DivideReactangle" RelativePanel.AlignVerticalCenterWithPanel="True" Margin="10,0"
+                Orientation="Horizontal">
+                <TextBlock x:Name="Life1TextBlock"
+                    Foreground="White"
+                    FontFamily="Segoe MDL2 Assets"
+                    Text="&#xE0A5;"
+                    Margin="10">
+                </TextBlock>
+                <TextBlock x:Name="Life2TextBlock"
+                    Foreground="White"
+                    FontFamily="Segoe MDL2 Assets"
+                    Text="&#xE0A5;"
+                    Margin="10">
+                </TextBlock>
+                <TextBlock x:Name="Life3TextBlock"
+                    Foreground="White"
+                    FontFamily="Segoe MDL2 Assets"
+                    Text="&#xE0A5;"
+                    Margin="10">
+                </TextBlock>
+                <TextBlock x:Name="Life4TextBlock"
+                    Foreground="White"
+                    FontFamily="Segoe MDL2 Assets"
+                    Text="&#xE0A5;"
+                    Margin="10">
+                </TextBlock>
+                <TextBlock x:Name="Life5TextBlock"
+                    Foreground="White"
+                    FontFamily="Segoe MDL2 Assets"
+                    Text="&#xE0A5;"
+                    Margin="10">
+                </TextBlock>
+
+            </StackPanel>
+            <Rectangle x:Name="DivideReactangle2" Fill="White" Width="1" RelativePanel.RightOf="LifeStackPanel" Height="20" RelativePanel.AlignVerticalCenterWithPanel="True"/>
+            <Grid
+                Name="StatGrid"
+                RelativePanel.RightOf="DivideReactangle2"
+                RelativePanel.AlignVerticalCenterWithPanel="True"
+                Margin="20,0,0,0"
+                >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Foreground="White"
+                    Text="ST"
+                    FontSize="10"/>
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Foreground="White"
+                    Text="MI"
+                    FontSize="10"/>
+                <TextBlock
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Foreground="White"
+                    Text="0"
+                    Name="ShotsTextBlock"
+                    Margin="10,0"
+                    FontSize="10"/>
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Foreground="White"
+                    Name="MissedTextBlock"
+                    Text="0"
+                    Margin="10,0"
+                    FontSize="10"/>
+            </Grid>
+            <TextBlock
+                    Foreground="White"
+                    Name="SpeedTextBlock"
+                    Text="2.00 / s"
+                    RelativePanel.RightOf="StatGrid"
+                    RelativePanel.AlignVerticalCenterWithPanel="True"
+                    FontSize="15"
+                    VerticalAlignment="Bottom" 
+                    Margin="0.4,0,19.6,0"/>
+            <StackPanel
+                Name="DetailStackPanel"
+                Orientation="Horizontal"
+                RelativePanel.RightOf="SpeedTextBlock"
+                RelativePanel.AlignVerticalCenterWithPanel="True"
+                Margin="0,0,10,0">
+                <TextBlock
+                    Foreground="White"
+                    Name="PercentageTextBlock"
+                    Text="0%"
+                    FontSize="15"
+                    VerticalAlignment="Center" 
+                    Margin="0,0,20,0"/>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="AUTO"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Row="0" Foreground="White" FontSize="7" Margin="0,0,10,0">RING</TextBlock>
+                    <TextBlock Grid.Row="1" Foreground="White" FontSize="7">NUM</TextBlock>
+                    <TextBlock Grid.Row="2" Foreground="White" FontSize="7">PECT</TextBlock>
+                    <TextBlock Grid.Row="0" Grid.Column="1" Foreground="White" FontSize="7">1</TextBlock>
+                    <TextBlock Grid.Row="0" Grid.Column="2" Foreground="White" FontSize="7">2</TextBlock>
+                    <TextBlock Grid.Row="0" Grid.Column="3" Foreground="White" FontSize="7">3</TextBlock>
+
+                    <TextBlock Grid.Row="1" Grid.Column="1" Foreground="White" FontSize="7" Name="Ring1TextBlock">-</TextBlock>
+                    <TextBlock Grid.Row="1" Grid.Column="2" Foreground="White" FontSize="7" Name="Ring2TextBlock">-</TextBlock>
+                    <TextBlock Grid.Row="1" Grid.Column="3" Foreground="White" FontSize="7" Name="Ring3TextBlock">-</TextBlock>
+
+                    <TextBlock Grid.Row="2" Grid.Column="1" Foreground="White" FontSize="7" Width="30" Name="Rp1TextBlock">-</TextBlock>
+                    <TextBlock Grid.Row="2" Grid.Column="2" Foreground="White" FontSize="7" Width="30" Name="Rp2TextBlock">-</TextBlock>
+                    <TextBlock Grid.Row="2" Grid.Column="3" Foreground="White" FontSize="7" Width="30" Name="Rp3TextBlock">-</TextBlock>
+
+                </Grid>
+            </StackPanel>
+        </RelativePanel>
+        <SplitView Grid.Row="1" Grid.ColumnSpan="2" Name="MainSplitView" PanePlacement="Right" OpenPaneLength="200">
+            <SplitView.Content>
+                <Frame Name="MainFrame"></Frame>
+            </SplitView.Content>
+            <SplitView.Pane>
+                <StackPanel Orientation="Vertical">
+                    <ListView> 
+                        <ListViewItem>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock VerticalAlignment="Center" Width="100">SOUND</TextBlock>
+                                <ToggleSwitch Margin="20,0,0,0" Name="SoundToggle" IsOn="True"></ToggleSwitch>
+                            </StackPanel>
+                        </ListViewItem>
+                        <ListViewItem>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock VerticalAlignment="Center" Width="100">INVINCIBLE</TextBlock>
+                                <ToggleSwitch Margin="20,0,0,0" Name="InvincibleToggle"></ToggleSwitch>
+                            </StackPanel>
+                        </ListViewItem>
+                    </ListView>
+                    <StackPanel Orientation="Vertical" Margin="12,0">
+                        <TextBlock VerticalAlignment="Center" Margin="0,15,0,0" >COLOR</TextBlock>
+                        <StackPanel Orientation="Vertical">
+                            <RadioButton IsChecked="True" Checked="RadioButton_Checked" Name="black">Black</RadioButton>
+                            <RadioButton Checked="RadioButton_Checked" Name="orange">Orange</RadioButton>
+                            <RadioButton Checked="RadioButton_Checked" Name="green">Green</RadioButton>
+                            <RadioButton Checked="RadioButton_Checked" Name="blue">Blue</RadioButton>
+                        </StackPanel>
+                    </StackPanel>
+                    <TextBlock FontSize="10" TextAlignment="Center" VerticalAlignment="Bottom" Margin="0,20">
+                        Copyrights © 2017, <Hyperlink NavigateUri="http://elyar.me">Elyar Adil</Hyperlink>.
+                        <LineBreak/>All rights reserved.</TextBlock>
+
+                </StackPanel>
+            </SplitView.Pane>
+        </SplitView>
+    </Grid>
+</Page>

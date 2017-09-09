@@ -1,0 +1,115 @@
+﻿<Page
+    x:Class="_41m60t.Assets.ResultPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    SizeChanged="Page_SizeChanged"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="ResultStackPanel.Orientation" Value="Vertical"/>
+                        <Setter Target="RingGrid.Margin" Value="20,20"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="700"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="ResultStackPanel.Orientation" Value="Horizontal"/>
+                        <Setter Target="RingGrid.Margin" Value="50,0"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+
+        </Grid.ColumnDefinitions>
+        <TextBlock FontSize="35" Grid.ColumnSpan="2" Margin="20" TextAlignment="Center">RESULTS</TextBlock>
+        <StackPanel Name="ResultStackPanel" Grid.Column="0" Grid.Row="1" Width="Auto" Margin="20,20">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0" HorizontalAlignment="Right">TIME</TextBlock>
+                <TextBlock Grid.Row="1" HorizontalAlignment="Right">TOTAL SHOTS</TextBlock>
+                <TextBlock Grid.Row="2" HorizontalAlignment="Right">MISSED SHOTS</TextBlock>
+                <TextBlock Grid.Row="3" HorizontalAlignment="Right">HIT/TOTAL</TextBlock>
+
+                <TextBlock Grid.Row="0" Grid.Column="2" Name="TimeTextBlock">0.00</TextBlock>
+                <TextBlock Grid.Row="1" Grid.Column="2" Name="TotalShotsTextBlock">0</TextBlock>
+                <TextBlock Grid.Row="2" Grid.Column="2" Name="MissedTextBlock">0</TextBlock>
+                <TextBlock Grid.Row="3" Grid.Column="2" Name="HitMissedTextBlock">0.00%</TextBlock>
+                <Rectangle Grid.Column="1" Grid.RowSpan="4" Fill="Black" Margin="20,0" Width="1">
+
+                </Rectangle>
+            </Grid>
+            <Grid Margin="20, 20" Name="RingGrid">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Rectangle Grid.Column="1" Grid.RowSpan="4" Margin="10,0" Width="1"></Rectangle>
+                <TextBlock Grid.Row="0" HorizontalAlignment="Left">RING</TextBlock>
+                <TextBlock Grid.Row="1" HorizontalAlignment="Left">HIT</TextBlock>
+                <TextBlock Grid.Row="2" HorizontalAlignment="Left">PECT</TextBlock>
+
+                <TextBlock Grid.Row="0" Grid.Column="2">1</TextBlock>
+                <TextBlock Grid.Row="0" Grid.Column="3">2</TextBlock>
+                <TextBlock Grid.Row="0" Grid.Column="4">3</TextBlock>
+                <TextBlock Grid.Row="1" Grid.Column="2" Name="r1h">0</TextBlock>
+                <TextBlock Grid.Row="1" Grid.Column="3" Name="r2h">0</TextBlock>
+                <TextBlock Grid.Row="1" Grid.Column="4" Name="r3h">0</TextBlock>
+
+                <TextBlock Grid.Row="2" Grid.Column="2" Margin="0,0,10,0" Name="r1p">0.00%</TextBlock>
+                <TextBlock Grid.Row="2" Grid.Column="3" Margin="0,0,10,0" Name="r2p">0.00%</TextBlock>
+                <TextBlock Grid.Row="2" Grid.Column="4" Name="r3p">0.00%</TextBlock>
+
+                <Canvas Name="RingCanvas" Grid.Row="3" Grid.ColumnSpan="5" Height="2" Background="#232323" Margin="0,10,0,0">
+                </Canvas>
+            </Grid>
+        </StackPanel>
+
+        <Canvas HorizontalAlignment="Right" Margin="30" Grid.Row="1" Grid.Column="1" Name="ResultCanvas" Height="150" VerticalAlignment="Top" Width="150">
+            <Ellipse Fill="Red" StrokeThickness="5" HorizontalAlignment="Left" Height="150" Stroke="White" VerticalAlignment="Top" Width="150"/>
+            <Ellipse Fill="Red" StrokeThickness="5"  HorizontalAlignment="Left" Height="100" Stroke="White" VerticalAlignment="Top" Width="100" Margin="25,25"/>
+            <Ellipse Fill="Red" StrokeThickness="5"  HorizontalAlignment="Left" Height="50" Stroke="White" VerticalAlignment="Top" Width="50" Margin="50,50"/>
+        </Canvas>
+    </Grid>
+</Page>
