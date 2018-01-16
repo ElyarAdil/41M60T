@@ -174,7 +174,7 @@ namespace _41m60t.Assets
 
         private void TargetHit(Target t,double x, double y)
         {
-            ShotPoints.Add(new Point(x, y));
+            ShotPoints.Add(new Point(x - t.radius, y - t.radius));
             switch (t.Ring)
             {
                 case 1:

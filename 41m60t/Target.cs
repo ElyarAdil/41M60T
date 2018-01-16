@@ -14,7 +14,7 @@ namespace _41m60t
     public class Target
     {
         public static int initial_radius = 35;
-        private float radius;
+        public float radius;
         private int life;
         private int age = 0;
         private bool hited = false;

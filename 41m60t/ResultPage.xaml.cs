@@ -77,8 +77,8 @@ namespace _41m60t.Assets
                     Height = 5,
                     Fill = new SolidColorBrush(Colors.Black)
                 };
-                double x = point.x * 150 / (2 * Target.initial_radius);
-                double y = point.y * 150 / (2 * Target.initial_radius);
+                double x = point.x * 150 / (2 * Target.initial_radius) - 2.5f + 75;
+                double y = point.y * 150 / (2 * Target.initial_radius) - 2.5f + 75;
                 Canvas.SetLeft(ellipse, x);
                 Canvas.SetTop(ellipse, y);
                 ResultCanvas.Children.Add(ellipse);
